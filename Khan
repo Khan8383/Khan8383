@@ -1,0 +1,32 @@
+from colorama import Fore, Style, init
+init(autoreset=True)
+
+def caesar_cipher_encode(text, shift):
+    encoded_text = ''
+    for char in text:
+        if char.isalpha():
+            shift_amount = shift % 26
+            start = ord('A') if char.isupper() else ord('a')
+            encoded_char = chr(start + (ord(char) - start + shift_amount) % 26)
+            encoded_text += encoded_char
+        else:
+            encoded_text += char
+    return encoded_text
+
+def print_colored_name(name):
+    colors = [Fore.RED, Fore.GREEN, Fore.YELLOW, Fore.BLUE, Fore.MAGENTA, Fore.CYAN]
+    color_index = 0
+    colored_name = ""
+    for char in name:
+        colored_name += colors[color_index % len(colors)] + char
+        color_index += 1
+    print(colored_name + Style.RESET_ALL)
+
+# Example usage
+name = "JohnDoe"
+shift_amount = 3
+encoded_name = caesar_cipher_encode(name, shift_amount)
+print("Encoded Name:", encoded_name)
+
+print("Colorful Encoded Name:")
+print_colored_name(encoded_name)
